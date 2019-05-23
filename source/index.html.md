@@ -1,239 +1,372 @@
 ---
-title: API Reference
+title: Gas Premium API
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - javascript: Request
+  - csharp: Success Response
+  - java: Error Response
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
+  - <a href='http://kokonutstudio.com/'>Kokonut Studio</a>
 
 search: true
 ---
 
-# Introduction
+# Gas Premium API Reference
+Link al código fuente: [GasPremium_Backend](https://github.com/KokonutStudioRepository/GasPremium_Backend).
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+### API BASE URL
+Variable |  Value
+--------------|---------
+{{url}} | https://gasapi.kokonutstudio.com/api
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Si la respuesta de los servicios son llevadas a cabo satisfactoriamente se devuelve como Success <code>1</code> y si no, se devuelve <code>0</code>.
 </aside>
 
-# Kittens
 
-## Get All Kittens
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
+# APP-ENPOINTS
+Servicios expuestos para consumo interno de aplicaciones móviles.
+# Usuarios
+## Registrar un nuevo usuario
+> Ejemplo:
 
 ```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
+// Registro con correo electrónico y contraseña
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "name": "Developer",
+    "last_name": "Kokonut Studio",
+    "email": "developer@kokonutstudio.com",
+    "password": "123qwe",
+    "phone": "5522222222"
+}
+// Registro con Facebook Token
+{
+    "name": "Developer",
+    "last_name": "Kokonut Studio",
+    "email": "developer@kokonutstudio.com",
+    "fbuid": "eyJ0eXAiOi...cRgHhBjwU"
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
+```csharp
 {
-  "id": 2,
-  "deleted" : ":("
+  "success": 1,
+  "message": "Usuario registrado correctamente.",
+  "data": null
 }
 ```
 
-This endpoint deletes a specific kitten.
+```java
+// Error por falta de parámetros
+{
+  "success": 0,
+  "message": "Hace falta enviar información.",
+  "data": null
+}
+// Error por duplicidad de correo electrónico
+{
+  "success": 0,
+  "message": "Correo electrónico previamente registrado.",
+  "data": null
+}
+// Error por duplicidad del token asociado con Facebook
+{
+  "success": 0,
+  "message": "Usuario Facebook registrado previamente.",
+  "data": null
+}
+```
 
-### HTTP Request
+Registra a un usuario con su correo electrónico y su contraseña ó con Token de acceso Facebook.
 
-`DELETE http://example.com/kittens/<ID>`
+HTTP Request  | Name Endpoint |  Endpoint
+--------------|---------------|---------------
+POST          | REGISTER      | {{url}}/register
 
-### URL Parameters
+### Parámetros
+Key         | Descripción                      | Type    | Obligación de envío
+------------|----------------------------------|---------|---------------------------------------------
+name        | Nombre del usuario               | String  | Siempre
+last_name   | Apellidos del usuario            | String  | Siempre
+username    | Correo electrónico del usuario   | String  | Siempre
+password    | Contraseña de acceso del usuario | String  | Solo si es registro con correo y contraseña
+phone       | Teléfono del usuario             | String  | Opcional
+fbuid       | Token de acceso Facebook         | String  | Solo si es registro con Facebook
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
+
+## Inicio de sesión
+> Ejemplo:
+
+```javascript
+// Inicio de sesión con correo electrónico y contraseña
+{
+    "username": "developer@kokonutstudio.com",
+    "password": "123qwe"
+}
+// Inicio de sesión con Facebook Token
+{
+  "fbuid": "0000000000...123456789"
+}  
+```
+
+```csharp
+// Inicio de sesión con correo electrónico y contraseña
+{
+  "token_type": "Bearer",
+  "expires_in": 604800,
+  "access_token": "eyJ0eXAiOi...cRgHhBjwU",
+  "refresh_token": "def50a8e4...a6e90dcfe"
+}
+// Inicio de sesión con Facebook Token
+{
+  "token_type": "Bearer",
+  "access_token": "eyJ0eX...juDzGI2AQz88N_tcc",
+  "refresh_token": ""
+}
+```
+
+```java
+// Error por falta de parámetros
+{
+  "success": 0,
+  "message": "Hubo un error al autenticar el usuario.",
+  "data": null
+}
+// Error en la validación de credenciales por correo electrónico y contraseña
+{
+  "success": 0,
+  "message": "Usuario o contraseña no valida.",
+  "data": null
+}
+// Error en la validación de credenciales por Facebook Token
+{
+  "success": 0,
+  "message": "El usuario Facebook no existe.",
+  "data": null
+}
+```
+
+Autentica a un usuario con su correo electrónico y su contraseña ó con Token de acceso Facebook.
+
+### Body
+HTTP Request  | Name Endpoint |  Endpoint
+--------------|---------------|---------------
+POST          | LOGIN         | {{url}}/login
+
+### Parámetros
+Key         | Descripción                      | Type    | Obligación de envío
+------------|----------------------------------|---------|---------------------------------------------
+username    | Correo electrónico del usuario   | String  | Solo si es login con correo y contraseña
+password    | Contraseña de acceso del usuario | String  | Solo si es login con correo y contraseña
+fbuid       | Token de acceso Facebook         | String  | Solo si es login con Facebook
+
+
+
+## Obtener perfil
+> Ejemplo:
+
+```javascript
+/* NO BODY */
+```
+
+```csharp
+{
+  "success": 1,
+  "message": null,
+  "data": [
+    {
+      "id": 12,
+      "name": "Jason",
+      "phone": "5598054918",
+      "last_name": "Garcia",
+      "email": "email_1@qa.com",
+      "fbuid": null,
+      "address": null,
+      "image": "",
+      "firebase_id": null,
+      "conekta_id": null,
+      "user_type_id": 2,
+      "created_at": "2019-05-23 15:55:17",
+      "updated_at": "2019-05-23 15:55:17"
+      }
+      ]
+}
+```
+
+```java
+// Error por AccessToken incorrecto
+{
+  "success": 0,
+  "message": "Unauthenticated",
+  "data": []
+}
+```
+
+Obtiene el perfil del usuario al que está asociado el Access Token 
+
+### Body
+HTTP Request  | Name Endpoint |  Endpoint
+--------------|---------------|------------------
+GET           | GET_PROFILE   | {{url}}/profile
+
+### Header
+Key          | Descripción                              | Type    | Obligación de envío
+-------------|------------------------------------------|---------|----------------------
+Autorization | AccessToken obtenido al iniciar sesión   | Bearer  | Siempre
+
+
+
+## Actualizar perfil
+> Ejemplo:
+
+```javascript
+{
+    "name": "Developer",
+    "last_name": "Kokonut Studio",
+    "phone": "5522222222"
+}
+```
+
+```csharp
+{
+  "success": 1,
+  "message": "Actualización de perfil correcta.",
+  "data": null
+}
+```
+
+```java
+// Error por AccessToken incorrecto
+{
+  "success": 0,
+  "message": "Unauthenticated",
+  "data": []
+}
+```
+
+Actualiza el perfil del usuario al que está asociado el Access Token 
+
+### Body
+HTTP Request  | Name Endpoint   |  Endpoint
+--------------|-----------------|----------------------
+PUT           | UPDATE_PROFILE  | {{url}}/user/update
+
+### Header
+Key          | Descripción                              | Type    | Obligación de envío
+-------------|------------------------------------------|---------|----------------------
+Autorization | AccessToken obtenido al iniciar sesión   | Bearer  | Siempre
+
+### Parámetros
+Key         | Descripción                      | Type    | Obligación de envío
+------------|----------------------------------|---------|---------------------------------------------
+name        | Nombre del usuario               | String  | Opcional
+last_name   | Apellidos del usuario            | String  | Opcional
+phone       | Teléfono del usuario             | String  | Opcional
+
+
+
+
+
+
+# Métodos de Pago
+## Registrar un nuevo método de pago
+> Ejemplo:
+
+```javascript
+{
+    "token_id": "tok_test_mastercard_5100"
+}
+```
+
+```csharp
+{
+  "success": 1,
+  "message": "Metodo de pago asociado correctamente.",
+  "data": null
+}
+```
+
+```java
+{
+  "success": 0,
+  "message": "Hubo un error al registar el metodo de pago del usuario.",
+  "data": null
+}
+```
+
+Registra y asocia a un usuario un nuevo método de pago a partir del idéntificador tokenizado de la tarjeta.
+
+HTTP Request  | Name Endpoint        | Endpoint
+--------------|----------------------|---------------
+POST          | SAVE_PAYMENT_METHOD  | {{url}}/save-method-payment
+
+### Header
+Key          | Descripción                              | Type    | Obligación de envío
+-------------|------------------------------------------|---------|----------------------
+Autorization | AccessToken obtenido al iniciar sesión   | Bearer  | Siempre
+
+### Parámetros
+Key         | Descripción                                                   | Type    | Obligación de envío
+------------|---------------------------------------------------------------|---------|---------------------
+token_id    | Valor obtenido de tokenizar una tarjeta con el SDK de Conekta | String  | Siempre
+
+
+
+## Obtener los métodos de pago de un usuario
+> Ejemplo:
+
+```javascript
+/* NO BODY */
+```
+
+```csharp
+// Si el usuario no tiene métodos de pago asociados
+{
+  "success": 1,
+  "message": "Sin métodos de pago asociados.",
+  "data": null
+}
+// Si el usuario tiene al menos un método de pago asociado
+{
+  "success": 1,
+  "message": null,
+  "data": [
+    {
+      "id": "src_2kgcvqDqyLfd1MdtU",
+      "object": "payment_source",
+      "type": "card",
+      "created_at": 1558651182,
+      "last4": "5100",
+      "bin": "510510",
+      "exp_month": "12",
+      "exp_year": "19",
+      "brand": "VISA",
+      "name": "Jorge Lopez",
+      "parent_id": "cus_2kgcvqDqyLfd1MdtR",
+      "default": true
+    }
+  ]
+}
+```
+
+```java
+{
+  "success": 0,
+  "message": "Unauthenticated",
+  "data": []
+}
+```
+
+Obtiene los métodos de pago asociados a un usuario.
+
+HTTP Request  | Name Endpoint        | Endpoint
+--------------|----------------------|---------------
+GET           | GET_PAYMENT_METHODS  | {{url}}/method-payment
+
+### Header
+Key          | Descripción                              | Type    | Obligación de envío
+-------------|------------------------------------------|---------|----------------------
+Autorization | AccessToken obtenido al iniciar sesión   | Bearer  | Siempre
