@@ -349,7 +349,7 @@ token_id    | Valor obtenido de tokenizar una tarjeta con el SDK de Conekta | St
       "default": true
     }
   ]
-}
+} 
 ```
 
 ```java
